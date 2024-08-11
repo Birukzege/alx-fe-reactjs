@@ -1,9 +1,10 @@
 
-import WelcomeMessage from './WelcomeMessage';
+
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import WelcomeMessage from './WelcomeMessage';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,7 +12,8 @@ function App() {
   return (
     <>
         <div>
-            {/* <h1>Welcome to My React App</h1> */}
+        <h1>Hello everyone, I am learning React at ALX!</h1>
+        <p>I am learning about JSX!</p>
             <WelcomeMessage />
         </div>
       <div>
