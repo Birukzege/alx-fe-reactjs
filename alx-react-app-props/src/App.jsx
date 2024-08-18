@@ -9,6 +9,8 @@ import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
 import ProfilePage from './ProfilePage';
+import UserContext from '../UserProfie';
+
 
 function App() {
   const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
@@ -16,6 +18,10 @@ function App() {
 
   return (
     <>
+    <div>
+            <h1>Welcome to my App</h1>
+            <UserProfile name="EthioROBOT" age={10} bio="Your custom bio here" />
+        </div>
       <UserContext.Provider value={userData}>
         <div>
           <h1>User Profile</h1>
