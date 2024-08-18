@@ -2,12 +2,12 @@
 
 import React from 'react';
 
-function MainContent() {
+const MainContent = () => {
     return (
-        <main>
-            <p>I love to visit New York, Paris, and Tokyo.</p>
+        <main style={{ backgroundColor: 'lightgray', padding: '20px', margin: '10px' }}>
+            <p style={{ fontSize: '1.2em', color: 'darkblue' }}>I love to visit New York, Paris, and Tokyo.</p>
         </main>
     );
-}
+};
 
 export default MainContent;
