@@ -1,22 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import RecipeList from './components/RecipeList';
-import AddRecipeForm from './components/AddRecipeForm';
+import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
+import Home from './components/Home';
 import RecipeDetails from './components/RecipeDetails';
+import EditRecipeForm from './components/EditRecipeForm';
+// ... other imports
 
-const App = () => {
+function App() {
   return (
-    <Router>
-      <div>
-        <h1>Recipe Sharing App</h1>
-        <Switch>
-          <Route exact path="/" component={RecipeList} />
-          <Route exact path="/add" component={AddRecipeForm} />
-          <Route path="/recipe/:recipeId" component={RecipeDetails} />
-        </Switch>
-      </div>
-    </Router>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+        <Route path="/edit/:id" element={<EditRecipeForm />} />
+      </Routes>
+    </div>
   );
-};
+}
 
 export default App;
