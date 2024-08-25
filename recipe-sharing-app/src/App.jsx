@@ -1,23 +1,30 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import Routes and Route and BrowserRouter
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
 import Home from './components/Home';
 import RecipeDetails from './components/RecipeDetails';
 import EditRecipeForm from './components/EditRecipeForm';
-// ... other imports
-import AddRecipeForm from './components/AddRecipeForm'; // Import AddRecipeForm component
+import AddRecipeForm from './components/AddRecipeForm'; 
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
+import { useRecipeStore } from './recipeStore'; 
 
-function App() {
+const App = () => {
+  const { generateRecommendations } = useRecipeStore();
+
   return (
-    <BrowserRouter> {/* Wrap your Routes with BrowserRouter */}
+    <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} /> 
           <Route path="/recipe/:id" element={<RecipeDetails />} />
           <Route path="/edit/:id" element={<EditRecipeForm />} />
+          <Route path="/add" element={<AddRecipeForm />} /> {/* Add a route for adding recipes */}
         </Routes>
+        <FavoritesList /> {/* Display the FavoritesList */}
+        <RecommendationsList /> {/* Display the RecommendationsList */}
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
