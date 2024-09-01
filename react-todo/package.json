@@ -9,13 +9,11 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  {
-    "scripts": {
-      "start": "react-scripts start",
-      "build": "react-scripts build",
-      "test": "jest",
-      "eject": "react-scripts eject"
-    }
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -36,8 +34,18 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
+    "babel-jest": "^29.7.0",
     "jest": "^27.5.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
   }
 }
