@@ -1,37 +1,52 @@
-// src/components/RegistrationForm.jsx
-
-import React from 'react';
-import { useField } from 'formik';
+import React, { useState } from 'react';
 
 const RegistrationForm = () => {
-    const [usernameField, usernameMeta] = useField('username');
-    const [emailField, emailMeta] = useField('email');
-    const [passwordField, passwordMeta] = useField('password');
+    // Step 1: Set up state variables
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    // Step 2: Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Here you can handle form submission, e.g., send data to an API
+        console.log({ username, email, password });
+    };
 
     return (
-        <div>
+        <form onSubmit={handleSubmit}>
             <div>
-                <label>Username:</label>
-                <input type="text" {...usernameField} />
-                {usernameMeta.touched && usernameMeta.error ? (
-                    <p>{usernameMeta.error}</p>
-                ) : null}
+                <label htmlFor="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    value={username} // Step 3: Controlled input
+                    onChange={(e) => setUsername(e.target.value)} // Update state on change
+                    required
+                />
             </div>
             <div>
-                <label>Email:</label>
-                <input type="email" {...emailField} />
-                {emailMeta.touched && emailMeta.error ? (
-                    <p>{emailMeta.error}</p>
-                ) : null}
+                <label htmlFor="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    value={email} // Step 3: Controlled input
+                    onChange={(e) => setEmail(e.target.value)} // Update state on change
+                    required
+                />
             </div>
             <div>
-                <label>Password:</label>
-                <input type="password" {...passwordField} />
-                {passwordMeta.touched && passwordMeta.error ? (
-                    <p>{passwordMeta.error}</p>
-                ) : null}
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    value={password} // Step 3: Controlled input
+                    onChange={(e) => setPassword(e.target.value)} // Update state on change
+                    required
+                />
             </div>
-        </div>
+            <button type="submit">Register</button>
+        </form>
     );
 };
 
