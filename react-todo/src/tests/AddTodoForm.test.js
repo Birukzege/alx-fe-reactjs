@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import AddTodoForm from './AddTodoForm';
 
-function AddTodoForm({ onAddTodo }) {
-  const [newTodoText, setNewTodoText] = useState('');
+describe('AddTodoForm', () => {
+  test('calls onAddTodo with the new todo text', () => {
+    const onAddTodo = jest.fn();
+    render(<AddTodoForm onAddTodo={onAddTodo} />);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onAddTodo(newTodoText);
-    setNewTodoText('');
-  };
+    const inputElement = screen.getByRole('textbox');
+    fireEvent.change(inputElement, { target: { value: 'New Todo' } });
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={newTodoText}
-        onChange={(event) => setNewTodoText(event.target.value)}
-        placeholder="Add new todo"
-      />
-      <button type="submit">Add</button>
-    </form>
-  );
-}
+    const submitButton = screen.getByRole('button', { name: 'Add' });
+    fireEvent.click(submitButton);
 
-export default AddTodoForm;
+    expect(onAddTodo).toHaveBeenCalledWith('New Todo');
+  });
+});
+import { render, screen } from '@testing-library/react';
+   import AddTodoForm from '../components/AddTodoForm'; 
+
+   describe('AddTodoForm', () => {
+     it('should render the form correctly', () => {
+       render(<AddTodoForm />);
+       const formElement = screen.getByRole('form'); 
+       expect(formElement).toBeInTheDocument(); 
+     });
+   });
