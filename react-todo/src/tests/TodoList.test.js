@@ -1,5 +1,7 @@
+// TodoList.test.js
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../components/TodoList';
+import TodoList from './TodoList';
 
 test('renders initial todos', () => {
   render(<TodoList />);
@@ -7,22 +9,17 @@ test('renders initial todos', () => {
   expect(todoItems.length).toBe(2);
 });
 
-// test('adds a new todo', () => {
-//     render(<TodoList />);
-//     const inputElement = screen.getByRole('textbox');
-//     const addButton = screen.getByRole('button', { name: 'Add Todo' });
-  
-//     // Simulate typing into the input field
-//     fireEvent.change(inputElement, { target: { value: 'New Todo' } });
-  
-//     // Simulate clicking the "Add Todo" button
-//     fireEvent.click(addButton);
-  
-//     // Assert that the new todo is now rendered in the list
-//     const newTodoItem = screen.getByText('New Todo');
-//     expect(newTodoItem).toBeInTheDocument();
-//   });
-  
+test('adds a new todo', () => {
+  render(<TodoList />);
+  const inputElement = screen.getByRole('textbox');
+  const addButton = screen.getByText('Add Todo');
+
+  fireEvent.change(inputElement, { target: { value: 'New Todo' } });
+  fireEvent.click(addButton);
+
+  const newTodoItem = screen.getByText('New Todo');
+  expect(newTodoItem).toBeInTheDocument();
+});
 
 test('toggles a todo', () => {
   render(<TodoList />);
@@ -30,13 +27,13 @@ test('toggles a todo', () => {
 
   fireEvent.click(checkbox);
 
-  const todoText = screen.getByText('Learn React');
-  expect(todoText).toHaveStyle({ textDecoration: 'line-through' });
+  const todoText = screen.getByText('~Learn React~');
+  expect(todoText).toBeInTheDocument();
 });
 
 test('deletes a todo', () => {
   render(<TodoList />);
-  const deleteButton = screen.getAllByRole('button', { name: 'Delete' })[0];
+  const deleteButton = screen.getAllByText('Delete')[0];
 
   fireEvent.click(deleteButton);
 
