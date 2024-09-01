@@ -23,7 +23,7 @@ describe('TodoList Component', () => {
         fireEvent.change(input, { target: { value: 'Todo to Remove' } });
         fireEvent.click(screen.getByText('Add'));
         
-        fireEvent.click(screen.getByText('Remove')); // Adjust according to your implementation
+        fireEvent.click(screen.getByText('Remove')); // Ensure this matches your button text
         
         expect(screen.queryByText('Todo to Remove')).not.toBeInTheDocument();
     });
