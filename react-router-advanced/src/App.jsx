@@ -7,8 +7,6 @@ import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
-import ProfileDetails from './components/ProfileDetails';
-import ProfileSettings from './components/ProfileSettings';
 import Post from './components/Post';
 
 const App = () => {
@@ -19,8 +17,6 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<ProtectedRoute />}>
                     <Route index element={<Profile />} />
-                    <Route path="details" element={<ProfileDetails />} />
-                    <Route path="settings" element={<ProfileSettings />} />
                 </Route>
                 <Route path="/posts/:postId" element={<Post />} />
                 <Route path="*" element={<NotFound />} />
