@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import RegistrationForm from '../components/formikForm';
+import RegistrationForm from './components/formikForm';
 
 const App = () => {
     const validationSchema = Yup.object().shape({
