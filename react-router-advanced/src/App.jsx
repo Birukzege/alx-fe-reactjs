@@ -8,6 +8,7 @@ import NotFound from './components/NotFound';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import Post from './components/Post';
+import BlogPost from './components/BlogPost'; // Import BlogPost
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                     <Route index element={<Profile />} />
                 </Route>
                 <Route path="/posts/:postId" element={<Post />} />
+                <Route path="/blog/:id" element={<BlogPost />} /> {/* Dynamic route for BlogPost */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
