@@ -1,7 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import RegistrationForm from './components/RegistrationForm';
 import RegistrationForm from '../components/formikForm';
 
 const App = () => {
@@ -47,6 +46,10 @@ const App = () => {
                     </Form>
                 )}
             </Formik>
+            <div>
+                <h1>User Registration</h1>
+                <RegistrationForm />
+            </div>
         </div>
     );
 };
