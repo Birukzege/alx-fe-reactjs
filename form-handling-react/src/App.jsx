@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import RegistrationForm from './components/RegistrationForm';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+// src/App.js
+
+import React from 'react';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import RegistrationForm from './components/RegistrationForm';
 
 const App = () => {
     const validationSchema = Yup.object().shape({
@@ -27,21 +29,7 @@ const App = () => {
             >
                 {() => (
                     <Form>
-                        <div>
-                            <label>Username:</label>
-                            <Field type="text" name="username" />
-                            <ErrorMessage name="username" component="p" />
-                        </div>
-                        <div>
-                            <label>Email:</label>
-                            <Field type="email" name="email" />
-                            <ErrorMessage name="email" component="p" />
-                        </div>
-                        <div>
-                            <label>Password:</label>
-                            <Field type="password" name="password" />
-                            <ErrorMessage name="password" component="p" />
-                        </div>
+                        <RegistrationForm />
                         <button type="submit">Register</button>
                     </Form>
                 )}
