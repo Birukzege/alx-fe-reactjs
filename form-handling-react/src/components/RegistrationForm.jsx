@@ -18,9 +18,9 @@ const RegistrationForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="username" onChange={handleChange} placeholder="Username" />
-      <input type="email" name="email" onChange={handleChange} placeholder="Email" />
-      <input type="password" name="password" onChange={handleChange} placeholder="Password" />
+      <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Username" />
+      <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
+      <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" />
       <button type="submit">Submit</button>
     </form>
   );
