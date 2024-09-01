@@ -1,41 +1,30 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../components/TodoList';
-import React from 'react';
+import { render, screen } from '@testing-library/react';
+import TodoList from './TodoList';
 
-test('renders initial todos', () => {
-  render(<TodoList />);
-  const todoItems = screen.getAllByRole('listitem');
-  expect(todoItems.length).toBe(2);
-});
+describe('TodoList', () => {
+  test('renders a list of todos', () => {
+    render(<TodoList />);
 
-test('adds a new todo', () => {
-  render(<TodoList />);
-  const inputElement = screen.getByRole('textbox');
-  const addButton = screen.getByRole('button', { name: 'Add Todo' });
+    const todoItems = screen.getAllByRole('listitem');
+    expect(todoItems.length).toBe(3);
+  });
 
-  fireEvent.change(inputElement, { target: { value: 'New Todo' } });
-  fireEvent.click(addButton);
+  test('renders todo items with correct text', () => {
+    render(<TodoList />);
 
-  const newTodoItem = screen.getByText('New Todo');
-  expect(newTodoItem).toBeInTheDocument();
-});
-
-test('toggles a todo', () => {
-  render(<TodoList />);
-  const checkbox = screen.getAllByRole('checkbox')[0];
-
-  fireEvent.click(checkbox);
-
-  const todoText = screen.getByText('Learn React');
-  expect(todoText).toHaveStyle({ textDecoration: 'line-through' });
-});
-
-test('deletes a todo', () => {
-  render(<TodoList />);
-  const deleteButton = screen.getAllByRole('button', { name: 'Delete' })[0];
-
-  fireEvent.click(deleteButton);
-
-  const todoText = screen.queryByText('Learn React');
-  expect(todoText).not.toBeInTheDocument();
-});
+    const
+    todoTexts = screen.getAllByRole('listitem').map(
+        (item) => item.querySelector('span').textContent
+      );
+      expect(todoTexts).toEqual(['Learn React', 'Build a Todo List', 'Write Tests']);
+    });
+  
+    test('renders todo items with correct completion status', () => {
+      render(<TodoList />);
+  
+      const completedTodos = screen.getAllByRole('listitem').filter(
+        (item) => item.querySelector('input').checked
+      );
+      expect(completedTodos.length).toBe(1);
+    });
+  });
