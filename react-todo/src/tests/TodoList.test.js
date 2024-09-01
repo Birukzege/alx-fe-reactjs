@@ -28,3 +28,46 @@ test('deletes a todo', () => {
   fireEvent.click(deleteButton);
   // ... (Assert that the todo is no longer rendered)
 });
+
+
+test('adds a new todo', () => {
+    render(<TodoList />);
+    const inputElement = screen.getByRole('textbox');
+    const addButton = screen.getByRole('button', { name: 'Add Todo' }); 
+
+    // Simulate typing into the input field
+    fireEvent.change(inputElement, { target: { value: 'New Todo' } });
+
+    // Simulate clicking the "Add Todo" button
+    fireEvent.click(addButton); 
+
+    // Assert that the new todo is now rendered in the list
+    const newTodoItem = screen.getByText('New Todo'); 
+    expect(newTodoItem).toBeInTheDocument(); 
+  });
+  test('toggles a todo', () => {
+    render(<TodoList />);
+
+    // Get the first checkbox (assuming there's at least one todo)
+    const checkbox = screen.getAllByRole('checkbox')[0]; 
+
+       // Simulate clicking the checkbox
+       fireEvent.click(checkbox); 
+
+       // Assert that the todo's text has a strikethrough style (this is how we check for the "completed" status)
+       const todoText = screen.getByText('Learn React'); 
+       expect(todoText).toHaveStyle({ textDecoration: 'line-through' });
+     });
+     test('deletes a todo', () => {
+        render(<TodoList />);
+ 
+        // Get the first "Delete" button
+        const deleteButton = screen.getAllByRole('button', { name: 'Delete' })[0]; 
+ 
+        // Simulate clicking the button
+        fireEvent.click(deleteButton); 
+ 
+        // Assert that the todo item is no longer on the page
+        const todoText = screen.queryByText('Learn React'); // Use 'queryByText' to check if an element exists
+        expect(todoText).not.toBeInTheDocument();
+      });
