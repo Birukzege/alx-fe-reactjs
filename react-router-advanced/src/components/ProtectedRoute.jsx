@@ -1,14 +1,18 @@
-   // src/components/ProtectedRoute.jsx
+// src/components/ProtectedRoute.jsx
 
-   import React from 'react';
-   import { Navigate, Outlet } from 'react-router-dom';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
-   const ProtectedRoute = () => {
-       const isAuthenticated = false; // Simulate authentication status
+const ProtectedRoute = ({ children }) => {
+    const { isAuthenticated } = useAuth();
 
-       return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
-   };
+    if (!isAuthenticated) {
+        // Redirect them to the login page if not authenticated
+        return <Navigate to="/login" />;
+    }
 
-   export default ProtectedRoute;
+    return children; // Render the protected component if authenticated
+};
 
-
+export default ProtectedRoute;
