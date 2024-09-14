@@ -4,3 +4,8 @@ module.exports = {
       '^.+\\.jsx?$': 'babel-jest',
     },
   };
+  module.exports = {
+    // ... your existing configurations ...
+    setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'], // Add this line
+    // ... your existing configurations ...
+};
