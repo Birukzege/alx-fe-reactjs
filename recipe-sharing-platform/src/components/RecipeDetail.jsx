@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 const RecipeDetail = () => {
   const [recipe, setRecipe] = useState(null);
-  const { id } = useParams(); // Get the recipe ID from the URL
+  const { id } = useParams(); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,9 +26,9 @@ const RecipeDetail = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <img src={recipe.image} alt={recipe.title} className="w-full rounded-lg" />
+          <img src={recipe.image} alt={recipe.title} className="w-full rounded-lg shadow-md" /> {/* Added shadow class */}
         </div>
-        <div>
+        <div className="shadow-md rounded-lg p-4"> {/* Added shadow class and padding to the content */}
           <h2 className="text-2xl font-bold mb-4">Ingredients</h2>
           <ul className="list-disc pl-5">
             {recipe.ingredients.map((ingredient, index) => (
