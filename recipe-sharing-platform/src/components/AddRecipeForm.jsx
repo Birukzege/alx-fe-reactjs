@@ -1,36 +1,34 @@
 import React, { useState } from "react";
+// Import Tailwind CSS 
+import 'tailwindcss/tailwind.css';
 
 const AddRecipeForm = () => {
   const [recipeTitle, setRecipeTitle] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [preparationSteps, setPreparationSteps] = useState("");
+  const [ingredients, setIngredients] = useState([]);
+  const [preparationSteps, setPreparationSteps] = useState([]);
   const [errors, setErrors] = useState({});
-
-  // Validation function
-  const validate = () => {
-    const newErrors = {};
-    if (!recipeTitle.trim()) {
-      newErrors.recipeTitle = "Recipe title is required";
-    }
-    if (!ingredients.trim()) {
-      newErrors.ingredients = "Ingredients are required";
-    }
-    if (!preparationSteps.trim()) {
-      newErrors.preparationSteps = "Preparation steps are required";
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // True if no errors
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Call the validate function
-    const isValid = validate(); 
+    // Basic validation (you can add more robust validation)
+    const newErrors = {};
+    if (!recipeTitle) {
+      newErrors.recipeTitle = "Please enter a recipe title";
+    }
+    if (!ingredients.length) {
+      newErrors.ingredients = "Please add at least one ingredient";
+    }
+    if (!preparationSteps.length) {
+      newErrors.preparationSteps = "Please add at least one preparation step";
+    }
 
-    if (isValid) {
-      // Submit the form data (replace console.log with your submission logic)
-      console.log("Submitting recipe data:", {
+    setErrors(newErrors);
+
+    // If no errors, proceed with form submission
+    if (Object.keys(newErrors).length === 0) {
+      // Here you would typically send the recipe data to your backend
+      console.log("Recipe submitted:", {
         recipeTitle,
         ingredients,
         preparationSteps,
@@ -38,39 +36,76 @@ const AddRecipeForm = () => {
     }
   };
 
+  const handleIngredientChange = (index, value) => {
+    const newIngredients = [...ingredients];
+    newIngredients[index] = value;
+    setIngredients(newIngredients);
+  };
+
+  const handlePreparationStepChange = (index, value) => {
+    const newPreparationSteps = [...preparationSteps];
+    newPreparationSteps[index] = value;
+    setPreparationSteps(newPreparationSteps);
+  };
+
+  const addIngredient = () => {
+    setIngredients([...ingredients, ""]);
+  };
+
+  const addPreparationStep = () => {
+    setPreparationSteps([...preparationSteps, ""]);
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="recipeTitle">Recipe Title:</label>
+    <form onSubmit={handleSubmit} className="shadow rounded-md"> 
+      <div className="mb-4"> 
+        <label htmlFor="recipeTitle" className="block text-gray-700 text-sm font-bold mb-2">Recipe Title:</label>
         <input
           type="text"
           id="recipeTitle"
           value={recipeTitle}
           onChange={(e) => setRecipeTitle(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
-        {errors.recipeTitle && <span className="error">{errors.recipeTitle}</span>}
+        {errors.recipeTitle && <span className="error text-red-500 text-sm">{errors.recipeTitle}</span>}
       </div>
-      <div>
-        <label htmlFor="ingredients">Ingredients:</label>
-        <textarea
-          id="ingredients"
-          value={ingredients}
-          onChange={(e) => setIngredients(e.target.value)}
-        />
-        {errors.ingredients && <span className="error">{errors.ingredients}</span>}
+
+      <div className="mb-4">
+        <label htmlFor="ingredients" className="block text-gray-700 text-sm font-bold mb-2">Ingredients:</label>
+        {ingredients.map((ingredient, index) => (
+          <div key={index} className="mb-2">
+            <input
+              type="text"
+              id="ingredients"
+              value={ingredient}
+              onChange={(e) => handleIngredientChange(index, e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            /></div>
+        ))}
+        {errors.ingredients && <span className="error text-red-500 text-sm">{errors.ingredients}</span>}
+        <button type="button" onClick={addIngredient} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Ingredient</button>
       </div>
-      <div>
-        <label htmlFor="preparationSteps">Preparation Steps:</label>
-        <textarea
-          id="preparationSteps"
-          value={preparationSteps}
-          onChange={(e) => setPreparationSteps(e.target.value)}
-        />
-        {errors.preparationSteps && (
-          <span className="error">{errors.preparationSteps}</span>
-        )}
+
+      <div className="mb-4">
+        <label htmlFor="preparationSteps" className="block text-gray-700 text-sm font-bold mb-2">Preparation Steps:</label>
+        {preparationSteps.map((step, index) => (
+          <div key={index} className="mb-2">
+            <input
+              type="text"
+              id="preparationSteps"
+              value={step}
+              onChange={(e) => handlePreparationStepChange(index, e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+        ))}
+        {errors.preparationSteps && <span className="error text-red-500 text-sm">{errors.preparationSteps}</span>}
+        <button type="button" onClick={addPreparationStep} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Step</button>
       </div>
-      <button type="submit">Add Recipe</button>
+
+      <div className="flex items-center justify-center">
+        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Recipe</button>
+      </div>
     </form>
   );
 };
