@@ -39,8 +39,40 @@ const AddRecipeForm = () => {
   };
 
   return (
-    // ... (Rest of the form code from previous response) ...
-  ;
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="recipeTitle">Recipe Title:</label>
+        <input
+          type="text"
+          id="recipeTitle"
+          value={recipeTitle}
+          onChange={(e) => setRecipeTitle(e.target.value)}
+        />
+        {errors.recipeTitle && <span className="error">{errors.recipeTitle}</span>}
+      </div>
+      <div>
+        <label htmlFor="ingredients">Ingredients:</label>
+        <textarea
+          id="ingredients"
+          value={ingredients}
+          onChange={(e) => setIngredients(e.target.value)}
+        />
+        {errors.ingredients && <span className="error">{errors.ingredients}</span>}
+      </div>
+      <div>
+        <label htmlFor="preparationSteps">Preparation Steps:</label>
+        <textarea
+          id="preparationSteps"
+          value={preparationSteps}
+          onChange={(e) => setPreparationSteps(e.target.value)}
+        />
+        {errors.preparationSteps && (
+          <span className="error">{errors.preparationSteps}</span>
+        )}
+      </div>
+      <button type="submit">Add Recipe</button>
+    </form>
+  );
 };
 
 export default AddRecipeForm;
