@@ -5,6 +5,7 @@ import viteLogo from './assets/vite.svg';
 import './App.css';
 import HomePage from './components/HomePage';
 import RecipeDetail from './components/RecipeDetail';
+import AddRecipeForm from './components/AddRecipeForm'; // Added the import for AddRecipeForm
 
 function App() {
   const [count, setCount] = useState(0);
@@ -39,6 +40,9 @@ function App() {
         <p className="read-the-docs">
           Click on the Vite and React logos to learn more
         </p>
+        <div>
+          <AddRecipeForm />
+        </div>
       </>
     </Router>
   );
